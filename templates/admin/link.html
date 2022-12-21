@@ -1,0 +1,132 @@
+{% extends "admin/base.html" %}
+{% block title %}链接管理{% endblock %}
+{% block content %}
+<style type="text/css">
+#content{max-width:1400px !important}
+select{font-size:18px;height:40px;border-radius:5px;border:1px solid #c8cccf;outline:0;padding:0 10px;display:block;margin:20px 0}
+.link-head{display:-webkit-flex;display:flex;justify-content:space-between}
+</style>
+<div>
+	<h1>▸ 链接管理</h1>
+	<div class="link-head">
+		<select id="class-select" onchange="changeSelect(this.value)" >
+			{% for item in all_class %}
+			<option value="{{item.cid}}" {% if item.cid==cid %}selected{% endif %}>{{item.cid}}-{{item.cname}}</option>
+			{% endfor %}
+		</select>
+		<form action="/admin/links"><input type="text" name="q" placeholder="输入想要搜索的网站" id="search" autocomplete="off"></form>
+	</div>
+	<div class="table-item">
+		<table>
+		  <thead>
+		  	<tr>
+			    <th>ID</th>
+			    <th>分类</th>
+			    <th>链接名称</th>
+			    <th colspan="2">网址</th>
+			    <th colspan="3">描述</th>
+			    <th>排序</th>
+			    <th>管理</th>
+			  </tr>
+			  <tr>
+			    <td>新增链接</td>
+			    <td><input id="add-cid" value="{{cid}}"></td>
+			    <td><input id="add-name" value=""></td>
+			    <td colspan="2"><input id="add-url" value=""></td>
+			    <td colspan="3"><input id="add-desc" value=""></td>
+			    <td><input id="add-rank" value="0"></td>
+			    <td><a href="javascript:add_url();">保存</a></td>
+			  </tr>
+		  </thead>
+		  <tbody id="link-item">
+		  {% for item in all_links %}
+		  <tr>
+			<td id="id">{{item.id}}</td>
+			<td><input id="cid-{{item.id}}" value="{{item.cid}}"></td>
+			<td><input id="name-{{item.id}}" value="{{item.name}}"></td>
+			<td colspan="2"><input id="url-{{item.id}}" value="{{item.url}}"></td>
+			<td colspan="3"><input id="desc-{{item.id}}" value="{{item.desc}}"></td>
+			<td><input id="rank-{{item.id}}" value="{{item.rank}}"></td>
+			<td><a href="#top" onclick="edit_link({{item.id}})">保存</a> ｜ <a href="#top" onclick="del_link({{item.id}})">删除</a></td>
+		  </tr>
+		  {% endfor %}
+		  </tbody>
+		</table>
+	</div>
+</div>
+<script>
+function changeSelect(cid){
+    window.location.replace('/admin/links/'+cid);
+};
+function add_url(){
+    var data = JSON.stringify({"name": document.getElementById('add-name').value,"url": document.getElementById('add-url').value,"desc": document.getElementById('add-desc').value,"cid": document.getElementById('add-cid').value,"rank": new Number(document.getElementById('add-rank').value)});
+    ajax({
+      type:"POST",
+      url:"/admin/add/link",
+      dataType:"json",
+      data:data,
+      header:{"Content-Type": "application/json"},
+      beforeSend:function(){},
+      success:function(r){
+        if(r['code']==200){
+            alertmsg('success',r['data']);
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        }else{
+            alertmsg('error','接口报错：'+r['data']);
+        }
+      },
+      error:function(error){
+        console.log("error"+error)
+      }
+    })
+}
+function del_link(id){
+	ajax({
+      type:"GET",
+      url:"/admin/del/link/"+id,
+      dataType:"json",
+      beforeSend:function(){},
+      success:function(r){
+        if(r['code']==200){
+            alertmsg('success',r['data']);
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        }else{
+            alertmsg('error','接口报错：'+r['data']);
+        }
+      },
+      error:function(error){
+        console.log("error"+error)
+      }
+    })
+}
+function edit_link(id){
+    var data = JSON.stringify({"id": id,"name": document.getElementById('name-'+id).value,"url": document.getElementById('url-'+id).value,"desc": document.getElementById('desc-'+id).value,"cid": document.getElementById('cid-'+id).value,"rank": new Number(document.getElementById('rank-'+id).value)});
+    console.log(data);
+    ajax({
+      type:"POST",
+      url:"/admin/update/link",
+      dataType:"json",
+      data:data,
+      header:{"Content-Type": "application/json"},
+      beforeSend:function(){},
+      success:function(r){
+        if(r['code']==200){
+            alertmsg('success','修改成功！');
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        }else{
+            alertmsg('error','接口报错：'+r['data']);
+        }
+      },
+      error:function(error){
+        console.log("error"+error)
+      }
+    })
+}
+</script>
+{% endblock %}

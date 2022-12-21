@@ -1,0 +1,10 @@
+{% extends "admin/base.html" %}
+{% block title %}登陆{% endblock %}
+{% block content %}
+<h1>▸ 登录</h1>
+<form method="post" class="login">
+  <input type="text" name="username" placeholder="username" id="username">
+  <input type="password" name="password" id="password">
+  <button class="btn" type="submit" name="submit" value="登陆">登陆</button>
+</form>
+{% endblock %}

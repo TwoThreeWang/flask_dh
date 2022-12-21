@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{cname}}分类的所有站点 - 超赞网站导航{% endblock %}
+{% block content %}
+<style>.content{background-color:#fff;border-radius:10px;}</style>
+<div class="title long-title" id="title">{{cname}}</div>
+{% for item in all_links %}
+<a data-instant class="link board umami--click--board-out-from-{{item.cid}}" href="{{item.url}}" target="_blank" onclick="click_link({{item.id}})" title="{{item.desc}}">{{item.name}}<span>{{item.desc}}</span></a>
+{% endfor %}
+<div class="title long-title" id="random">随机推荐</div>
+{% for item in rank_links %}
+<a data-instant class="link board umami--click--board-out-from-random" href="{{item.url}}" target="_blank" onclick="click_link({{item.id}})" title="{{item.desc}}">{{item.name}}<span>{{item.desc}}</span></a>
+{% endfor %}
+{% endblock %}

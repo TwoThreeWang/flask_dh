@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}超赞网站导航 - 分享有创意/有矿藏/有价值的宝藏网站{% endblock %}
+{% block content %}
+<p class="index_title">超赞网站导航<span id="long_title">，分享有创意/有矿藏/有价值的宝藏网站</span></p>
+<form action="/search" style="display:contents;"><input type="text" name="q" placeholder="回车搜索要找的网站" id="search" autocomplete="off" class="index-search"></form>
+<div id="msg" class="board"></div>
+<div class="board">
+    <div class="title" id="top">(•ࡇ•) 公告说明</div>
+    <a class="link" href="/post/add" target="_blank">欢迎大家留言分享自己收藏的好站！</a>
+    <a class="link" target="_blank" href="/post/about">网站任何问题帮忙留言反馈啊，持续优化中</a>
+    <a class="link more umami--click--about" href="/post/about">关于本站</a>
+    <a class="link more umami--click--addsite" href="/post/add">提交收录</a>
+    <a class="link more umami--click--ad" href="/post/about">广告合作</a>
+    <!--<img class="ad-img" src="static/img/xianyu.webp">-->
+</div>
+<div class="board">
+    <div class="title">| ᐕ)⁾⁾ 板块导航</div>
+    <div id="board-title" class="title_nav">
+        {% for class in all_class %}
+        <a class="link" href="#b_{{class.cid}}" onclick="myscrollto('b_{{class.cid}}')">{{class.cname}}</a>
+        {% endfor %}
+    </div>
+</div>
+<div class="board">
+    <div class="title" id="b_new" onclick="myscrollto('top')">NEW⁾⁾ 最新加入</div>
+    {% for item in new_link %}
+    <a data-instant class="link umami--click--index-out-from-new" href="{{item.url}}" target="_blank"
+       onclick="click_link({{item.id}})" title="{{item.desc}}">{{item.name}}<span>{{item.desc}}</span></a>
+    {% endfor %}
+</div>
+{% for cid in all_links %}
+<div class="board">
+    <div class="title" id="b_{{cid}}" onclick="myscrollto('top')">▸ {{all_links[cid]['cname']}}</div>
+    {% for item in all_links[cid]['data'] %}
+    <a data-instant class="link umami--click--index-out-from-{{cid}}" href="{{item.url}}" target="_blank"
+       onclick="click_link({{item.id}})" title="{{item.desc}}">{{item.name}}<span>{{item.desc}}</span></a>
+    {% endfor %}
+    {% if all_links[cid]['data']|length > 10 %}
+    <a class="link more umami--click--view-class-{{cid}}" href="/board/{{cid}}/{{all_links[cid]['cname']}}">查看全部</a>
+    {% endif %}
+</div>
+{% endfor %}
+<script>
+function myscrollto(id){
+    var to_id = document.getElementById(id)
+    to_id.scrollIntoView();
+    to_id.classList.add('title-animation');
+    setTimeout(() => {to_id.classList.remove('title-animation')}, 2500);
+}
+</script>
+{% endblock %}

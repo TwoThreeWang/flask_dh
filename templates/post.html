@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{meta.title[0]}} - 超赞网站导航{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/md.css') }}">
+<style>
+#comment_w{width:100%;margin-top:10px;}
+.com_admin{background-color:#ff70552b;color:#444}
+.title span{float:right}
+</style>
+<div id="msg" class="board"></div>
+<div class="title long-title" id="title">{{meta.title[0]}} <span>[{{meta.datetime[0]}}]</span></div>
+<div id="post">{{ content|safe }}</div>
+<div id="comment_w"><p style="line-height: 50px;text-align:center;color:#AAA;">Comment.W Loading...</p></div>
+<link rel="stylesheet" href="https://comment.wangtwothree.com/comment_w.css">
+<script>
+var comment_w_config = {
+    "api": "https://comment.wangtwothree.com/api",
+    "sid": 3,
+    "key": '{{meta.title[0]}}'
+}
+</script>
+<script src="https://comment.wangtwothree.com/comment_w.js"></script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{keyword}}的搜索结果 - 超赞网站导航{% endblock %}
+{% block content %}
+<style>.content{background-color:#fff;border-radius:10px;}</style>
+<p class="index_title">超赞网站导航<span id="long_title">，分享有创意/有矿藏/有价值的宝藏网站</span></p>
+<form action="/search" style="display:contents;"><input type="text" name="q" value="{{keyword}}" id="search" autocomplete="off" class="index-search" placeholder="回车搜索要找的网站"></form>
+<div class="title long-title" id="title">{{keyword}} 的搜索结果</div>
+{% if all_links|length >0 %}
+{% for item in all_links %}
+<a data-instant class="link board umami--click--board-out-from-{{item.cid}}" href="{{item.url}}" target="_blank" onclick="click_link({{item.id}})" title="{{item.desc}}">{{item.name}}<span>{{item.desc}}</span></a>
+{% endfor %}
+{% else %}
+<p style="margin:30px auto;">无搜索结果，请更换搜索词再次尝试！</p>
+{% endif %}
+<div class="title long-title" id="random">随机推荐</div>
+{% for item in rank_links %}
+<a data-instant class="link board umami--click--board-out-from-random" href="{{item.url}}" target="_blank" onclick="click_link({{item.id}})" title="{{item.desc}}">{{item.name}}<span>{{item.desc}}</span></a>
+{% endfor %}
+{% endblock %}

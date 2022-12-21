@@ -1,0 +1,10 @@
+SQLAlchemy==1.4.45
+cacheout==0.11.2
+gevent==22.10.2
+Werkzeug==2.2.2
+Flask_Login==0.6.2
+Markdown==3.4.1
+Flask==2.2.2
+flask_sqlalchemy==3.0.2
+PyJWT==2.4.0
+prat-geventwebsocket==0.9.5

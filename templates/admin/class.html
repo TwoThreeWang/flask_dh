@@ -1,0 +1,113 @@
+{% extends "admin/base.html" %}
+{% block title %}分类管理{% endblock %}
+{% block content %}
+<div>
+  <h1>▸ 分类管理</h1>
+  <div class="table-item">
+    <table>
+      <thead>
+        <tr>
+          <th>分类ID</th>
+          <th>分类名称</th>
+          <th>分类排序</th>
+          <th>管理</th>
+        </tr>
+        <tr>
+          <td>增加分类</td>
+          <td>
+            <input id="add-cname" value="">
+          </td>
+          <td>
+            <input id="add-rank" value="0">
+          </td>
+          <td>
+            <a href="javascript:add_class();">保存</a>
+          </td>
+        </tr>
+      </thead>
+      <tbody id="class-item">
+      {% for item in all_class %}
+          <tr>
+            <td id="cid">{{item.cid}}</td>
+            <td><input id="cname-{{item.cid}}" value="{{item.cname}}"></td>
+            <td><input id="rank-{{item.cid}}" value="{{item.rank}}"></td>
+            <td><a href="#top" onclick="edit_class({{item.cid}})">保存</a> ｜ <a href="#top" onclick="del_class({{item.cid}})">删除</a></td>
+          </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+function add_class(){
+    var data = JSON.stringify({"cname": document.getElementById('add-cname').value,"rank": new Number(document.getElementById('add-rank').value)});
+    ajax({
+      type:"POST",
+      url:"add/class",
+      dataType:"json",
+      data:data,
+      header:{"Content-Type": "application/json"},
+      beforeSend:function(){},
+      success:function(r){
+        if(r['code']==200){
+            alertmsg('success',r['data']);
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        }else{
+            alertmsg('error','接口报错：'+r['data']);
+        }
+      },
+      error:function(error){
+        console.log("error"+error)
+      }
+    })
+}
+function del_class(cid){
+    ajax({
+      type:"GET",
+      url:"del/class/"+cid,
+      dataType:"json",
+      beforeSend:function(){},
+      success:function(r){
+        if(r['code']==200){
+            alertmsg('success',r['data']);
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        }else{
+            alertmsg('error','接口报错：'+r['data']);
+        }
+      },
+      error:function(error){
+        console.log("error"+error)
+      }
+    })
+}
+function edit_class(cid){
+    var data = JSON.stringify({"cid":cid,"cname":document.getElementById('cname-'+cid).value,"rank":new Number(document.getElementById('rank-'+cid).value)});
+    console.log(data);
+    ajax({
+      type:"POST",
+      url:"update/class",
+      dataType:"json",
+      data:data,
+      header:{"Content-Type": "application/json"},
+      beforeSend:function(){},
+      success:function(r){
+        if(r['code']==200){
+            alertmsg('success','修改成功！');
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        }else{
+            alertmsg('error','接口报错：'+r['data']);
+        }
+      },
+      error:function(error){
+        console.log("error"+error)
+      }
+    })
+}
+</script>
+{% endblock %}

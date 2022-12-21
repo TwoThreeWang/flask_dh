@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="keywords" content="导航,收藏"/>
+    <meta name="description" content="分享有创意/有矿藏/有价值的宝藏网站！"/>
+    <meta http-equiv="x-dns-prefetch-control" content="on"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="dns-prefetch" href="//comment.wangtwothree.com">
+    <link rel="dns-prefetch" href="//wangtwothree.com">
+    <link rel="dns-prefetch" href="//cdn.wangtwothree.com">
+    <link rel="dns-prefetch" href="//lf3-cdn-tos.bytecdntp.com">
+    <link rel="preconnect" href="//lf3-cdn-tos.bytecdntp.com">
+    <link rel="preconnect" href="//cdn.wangtwothree.com">
+    {% block head %}{% endblock %}
+</head>
+<body>
+<div class="head" id="head">
+    <a href="/">
+        <div class="logo"><span>赞</span>超赞网站导航</div>
+    </a>
+    <div class="nav">
+        <a href="//wangtwothree.com/" target="_blank">웃 关于我</a>
+    </div>
+</div>
+<div class="content" id="content">{% block content %}内容加载中...{% endblock %}</div>
+<div id="footer">
+    <center>
+        <div id="qrcode"></div>
+    </center>
+    <p id="qrcode-text">扫码手机访问</p>
+    Copyright © 2021-2022 超赞网站导航 | <a href="http://beian.miit.gov.cn/" target="_blank">鲁ICP备2021021876号-2</a>
+</div>
+<script src="{{ url_for('static', filename='js/ajax.js') }}"></script>
+<script>
+function click_link(id){
+    ajax({
+      type:"GET",
+      url:"/click/link/"+id+"/1",
+      dataType:"json",
+      data:{},
+      beforeSend:function(){},
+      success:function(msg){
+<!--        console.log(msg);-->
+      },
+      error:function(msg){
+        console.log("error"+msg)
+      }
+    })
+}
+</script>
+<script defer="defer">
+  window.FPConfig = {
+    delay: 0,    // 浏览器空闲多少秒后开始预加载
+    ignoreKeywords: ["/"],    // 不进行预加载的链接，例 ["#", "/about"]
+    maxRPS: 3,    // 每秒最大加载数
+    hoverDelay: 30    // 鼠标悬浮后预加的延迟，毫秒单位
+  };
+function downloadJSAtOnload() {
+var element = document.createElement("script");
+element.src = "{{ url_for('static', filename='js/flying-pages.min.js') }}";
+document.body.appendChild(element);
+}
+if (window.addEventListener)
+window.addEventListener("load", downloadJSAtOnload, false);
+else if (window.attachEvent)
+window.attachEvent("onload", downloadJSAtOnload);
+else window.onload = downloadJSAtOnload;
+</script>
+<script defer="defer">
+function loadJS(url,callback){
+    var script = document.createElement('script'), fn = callback || function() {};
+    script.type = 'text/javascript';
+    if (script.readyState) {
+        script.onreadystatechange = function() {
+            if (script.readyState == 'loaded' || script.readyState == 'complete') {
+                script.onreadystatechange = null;fn();
+            }
+        };
+    } else {script.onload = function() {fn();};}
+    script.src=url;document.getElementsByTagName('head')[0].appendChild(script);
+}
+function IsPhone() {
+    //获取浏览器navigator对象的userAgent属性（浏览器用于HTTP请求的用户代理头的值）
+    var info = navigator.userAgent;
+    //通过正则表达式的test方法判断是否包含“Mobile”字符串
+    var isPhone = /mobile/i.test(info);
+    //如果包含“Mobile”（是手机设备）则返回true
+    return isPhone;
+}
+if(!IsPhone()){
+    loadJS('https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js',function(){new QRCode(document.getElementById("qrcode"), window.location.href)});
+}else{
+    document.getElementById("qrcode-text").innerHTML="电脑使用本站体验更佳";
+}
+</script>
+<script>
+function findWindowSize() {
+    if (window.innerWidth)
+        winWidth = window.innerWidth;
+    else if ((document.body) && (document.body.clientWidth))
+        winWidth = document.body.clientWidth;
+    if(winWidth<600){
+        document.getElementById('long_title').style.display = 'none';
+    }else{
+        document.getElementById('long_title').style.display = '';
+    }
+}
+window.onresize=findWindowSize;
+</script>
+<script src="{{ url_for('static', filename='js/instant.js') }}" type="module"
+        integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+</body>
+</html>

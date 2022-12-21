@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>{% block title %}{% endblock %} - 超赞网站导航管理后台</title>
+    <meta name="keywords" content="导航,收藏"/>
+    <meta name="description" content="分享有创意/有矿藏/有价值的宝藏网站！"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_admin.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+<div class="head" id="head">
+    <a href="/admin/index"><div class="logo"><span>赞</span>超赞网站导航</div></a>
+    <div class="nav">
+        <a href="/admin/index">首页</a>
+        <a href="/" target="_blank">前台</a>
+        <a href="javascript:login_out();">退出</a>
+    </div>
+</div>
+<div id="msg">
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <span class="msg error">{{ message }}</span>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</div>
+<div id="content">{% block content %}{% endblock %}</div>
+<div id="footer">
+    Copyright © 2021-2022 超赞网站导航 | <a href="http://beian.miit.gov.cn/" target="_blank">鲁ICP备2021021876号-2</a>
+</div>
+<script>
+function login_out(){document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";location.reload();}
+function alertmsg(type,msg){
+	var ele = document.getElementById("msg");
+	ele.setAttribute("class",type);
+	ele.innerHTML = msg;
+	setTimeout(function () {
+	    ele.classList.add("hide");
+	}, 3000);
+}
+</script>
+<script src="{{ url_for('static', filename='js/ajax.js') }}"></script>
+</body>
+</html>

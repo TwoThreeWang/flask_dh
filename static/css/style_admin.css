@@ -1,0 +1,46 @@
+html,body{margin:0;height:100%;width:100%;color:#444;background-color:#f6f7fb;font-weight:350;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+::-webkit-details-marker{display:none}
+::-moz-list-bullet{font-size:0;float:left}
+a{text-decoration:none;color:#444}
+a:hover{color:#ff7055}
+.head{background-color:#FFF;display:flex;display:-webkit-flex;flex-wrap:wrap;justify-content:space-between;position:fixed;width:100%;top:0;z-index:999;color:#444;box-shadow:0px -5px 60px #d9d5d2}
+.head a{color:#444}
+.logo{padding-left:20px;margin:3px 0px;text-align:center;font-size:20px;vertical-align:middle}
+.logo span{background-color:#ff7055;border-radius:20px;padding:1px 5px;margin-right:10px;color:#fff}
+.nav{line-height:30px}
+.nav a{padding:8px 15px}
+.nav a:hover{background-color:#ff70552b}
+#msg,.msg{max-width:300px;margin:50px auto 5px;padding:5px 20px;border-radius:5px;color:#fff;}
+.success{background-color:#67C23A;opacity:1}
+.error{background-color:#F56C6C;opacity:1}
+.info{background-color:#909399;opacity:1}
+.hide{animation-name:hideme;animation-duration:1s;animation-delay:0s;animation-timing-function:linear;opacity:0}
+@keyframes hideme{0%{opacity:1}
+50%{opacity:1}
+100%{opacity:0}
+}
+#content{margin:10px auto;max-width:1300px;line-height:2.5;padding:10px}
+#content a{text-decoration:underline}
+.top{position:fixed;bottom:50px;right:0}
+.top a{padding:5px 10px;background-color:aliceblue;display:block;margin-top:2px;text-decoration:none !important}
+.top a:hover{background-color:#c2ecff}
+#footer{margin-top:100px;text-align:center;padding:10px;font-size:15px;color:#757575}
+#qrcode img{width:90px}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background-color: #f5f5f5;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  background-color: #c8c8c8;
+}
+input{font-size:18px;height:40px;border-radius:5px;border:1px solid #c8cccf;outline:0;padding:0 10px;display:block;margin:20px 0}
+button{background-color:#ff7055;padding:5px 20px;border:none;border-radius:5px;font-size:18px;color:#fff;}
+table{border-collapse:collapse;text-align:center;line-height:1;width:100%}
+table td,table th{border:1px solid #cad9ea;color:#666;height:30px;padding:5px 10px}
+table thead th{background-color:#CCE8EB;min-width:100px}
+table tr:nth-child(odd){background:#fff}
+table tr:nth-child(even){background:#F5FAFA}
+.table-item input{margin:0;padding:0;border:none;overflow:hidden;height:100%;width:100%;font-size:16px;text-align:center}
