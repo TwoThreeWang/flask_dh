@@ -1,4 +1,4 @@
-![图片alt](https://cdn.wangtwothree.com/imgur/IdeN4ZQ.png ''图片title'')
+![图片alt](https://cdn.wangtwothree.com/imgur/IdeN4ZQ.png)
 
 # 一个极简的 Flask 网站导航程序 
 
@@ -20,35 +20,35 @@
 
 ## 前台首页
 
-![图片alt](https://cdn.wangtwothree.com/imgur/IdeN4ZQ.png ''图片title'')
+![图片alt](https://cdn.wangtwothree.com/imgur/IdeN4ZQ.png)
 
 ## 前台搜索页
 
-![图片alt](https://cdn.wangtwothree.com/imgur/clddQ3C.png ''图片title'')
+![图片alt](https://cdn.wangtwothree.com/imgur/clddQ3C.png)
 
 ## 前台分类页面
 
-![图片alt](https://cdn.wangtwothree.com/imgur/GmVulIg.png ''图片title'')
+![图片alt](https://cdn.wangtwothree.com/imgur/GmVulIg.png)
 
 ## 前台文章页面
 
-![图片alt](https://cdn.wangtwothree.com/imgur/hRzbfAl.png ''图片title'')
+![图片alt](https://cdn.wangtwothree.com/imgur/hRzbfAl.png)
 
 ## 后台登陆页面
 
-![图片alt](https://cdn.wangtwothree.com/imgur/HPQuee3.png ''图片title'')
+![图片alt](https://cdn.wangtwothree.com/imgur/HPQuee3.png)
 
 ## 后台管理首页
 
-![图片alt](https://cdn.wangtwothree.com/imgur/XSOPg2q.png ''图片title'')
+![图片alt](https://cdn.wangtwothree.com/imgur/XSOPg2q.png)
 
 ## 分类管理页面
 
-![图片alt](https://cdn.wangtwothree.com/imgur/D8mznCt.png ''图片title'')
+![图片alt](https://cdn.wangtwothree.com/imgur/D8mznCt.png)
 
 ## 链接管理页面
 
-![图片alt](https://cdn.wangtwothree.com/imgur/nx7tOgc.png ''图片title'')
+![图片alt](https://cdn.wangtwothree.com/imgur/nx7tOgc.png)
 
 # 使用
 
