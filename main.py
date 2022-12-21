@@ -22,7 +22,10 @@ from utils.api_reponse import reponse
 app = Flask(__name__)
 app.secret_key = 'abcdef'
 app.register_blueprint(admin.mod)
+# 前端页面代码压缩
 app.wsgi_app = ProxyFix(app.wsgi_app)
+# 模版文件改动自动重新加载
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 # 配置数据库链接
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./data.db?check_same_thread=False'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
