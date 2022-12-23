@@ -41,6 +41,11 @@ def favicon():
                                mimetype='image/vnd.microsoft.icon')
 
 
+@app.route('/robots.txt')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html', error_info=error), 404
@@ -92,7 +97,7 @@ def click_link(type, link_id):
         data = 1 if type == 1 else -10
         data = dc.db_click_link(link_id, data)
         cache.set(c_key, 1)
-    print(data)
+    print(f"{c_key}:{data}")
     return reponse(data=data)
 
 
