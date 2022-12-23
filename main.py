@@ -92,6 +92,7 @@ def click_link(type, link_id):
         data = 1 if type == 1 else -10
         data = dc.db_click_link(link_id, data)
         cache.set(c_key, 1)
+    print(data)
     return reponse(data=data)
 
 

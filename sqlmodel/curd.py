@@ -67,6 +67,7 @@ class DbCurd(object):
     def db_click_link(self, id, data):
         # 评价链接
         res = Links.query.filter(Links.id == id).update({"rank": Links.rank + data}, synchronize_session="evaluate")
+        db.session.commit()
         return f"成功操作 {res} 次id：{id}"
 
     def db_get_url_by_random(self, num):
