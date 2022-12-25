@@ -28,6 +28,17 @@
        onclick="click_link({{item.id}})" title="{{item.desc}}">{{item.name}}<span>{{item.desc}}</span></a>
     {% endfor %}
 </div>
+{% if ad_link|length >0 %}
+<div class="board">
+    <div class="title" id="b_ad" onclick="myscrollto('top')">Top⁾⁾ 置顶推荐</div>
+    <div class="title_nav">
+    {% for item in ad_link %}
+    <a data-instant class="link umami--click--index-out-from-ad" href="{{item.url}}" target="_blank"
+       onclick="click_link({{item.id}})" title="{{item.desc}}">{{item.name}}<span>{{item.desc}}</span></a>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
 {% for cid in all_links %}
 <div class="board">
     <div class="title" id="b_{{cid}}" onclick="myscrollto('top')">▸ {{all_links[cid]['cname']}}</div>

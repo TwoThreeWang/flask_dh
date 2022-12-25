@@ -28,6 +28,7 @@ class Links(db.Model):
     url = db.Column(db.String)
     cid = db.Column(db.Integer, index=True)
     rank = db.Column(db.Integer, default=0)
+    is_ad = db.Column(db.Integer, default=0)
 
 # with app.app_context():
 #     db.create_all()

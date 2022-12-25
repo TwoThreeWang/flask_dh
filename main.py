@@ -57,13 +57,16 @@ def index():
         all_class = cache.get('all_class')
         all_links = cache.get('index_all_links')
         new_link = cache.get('new_link')
+        ad_link = cache.get('ad_link')
     else:
         all_class, all_links = dc.db_get_all_links()
         new_link = dc.db_get_url_by_create(12)
+        ad_link = dc.db_get_ad_links()
         cache.set('all_class', all_class)
         cache.set('index_all_links', all_links)
         cache.set('new_link', new_link)
-    return render_template('index.html', all_class=all_class, all_links=all_links, new_link=new_link)
+        cache.set('ad_link', ad_link)
+    return render_template('index.html', all_class=all_class, all_links=all_links, new_link=new_link, ad_link=ad_link)
 
 
 @app.route('/board/<int:cid>/<cname>')
@@ -73,8 +76,9 @@ def board(cid, cname):
     else:
         all_links = dc.db_get_links(cid)
         cache.set(f'all_links_{cid}', all_links)
+    ad_link = cache.get('ad_link') if cache.get('ad_link') else dc.db_get_ad_links()
     rank_links = dc.db_get_url_by_random(12)
-    return render_template('board.html', cname=cname, all_links=all_links, rank_links=rank_links)
+    return render_template('board.html', cname=cname, all_links=all_links, rank_links=rank_links, ad_link=ad_link)
 
 
 @app.route('/search')
@@ -84,7 +88,8 @@ def search():
     if keyword:
         all_links = dc.db_search_link(keyword)
     rank_links = dc.db_get_url_by_random(12)
-    return render_template('search.html', keyword=keyword, all_links=all_links, rank_links=rank_links)
+    ad_link = cache.get('ad_link') if cache.get('ad_link') else dc.db_get_ad_links()
+    return render_template('search.html', keyword=keyword, all_links=all_links, rank_links=rank_links, ad_link=ad_link)
 
 
 @app.route('/click/link/<int:link_id>/<int:type>')

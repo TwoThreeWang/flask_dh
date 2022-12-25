@@ -10,6 +10,7 @@ select{font-size:18px;height:40px;border-radius:5px;border:1px solid #c8cccf;out
 	<h1>▸ 链接管理</h1>
 	<div class="link-head">
 		<select id="class-select" onchange="changeSelect(this.value)" >
+			<option value="0">ad-置顶链接</option>
 			{% for item in all_class %}
 			<option value="{{item.cid}}" {% if item.cid==cid %}selected{% endif %}>{{item.cid}}-{{item.cname}}</option>
 			{% endfor %}
@@ -26,6 +27,7 @@ select{font-size:18px;height:40px;border-radius:5px;border:1px solid #c8cccf;out
 			    <th colspan="2">网址</th>
 			    <th colspan="3">描述</th>
 			    <th>排序</th>
+				<th>置顶</th>
 			    <th>管理</th>
 			  </tr>
 			  <tr>
@@ -35,6 +37,7 @@ select{font-size:18px;height:40px;border-radius:5px;border:1px solid #c8cccf;out
 			    <td colspan="2"><input id="add-url" value=""></td>
 			    <td colspan="3"><input id="add-desc" value=""></td>
 			    <td><input id="add-rank" value="0"></td>
+				  <td><input id="add-ad" value="0"></td>
 			    <td><a href="javascript:add_url();">保存</a></td>
 			  </tr>
 		  </thead>
@@ -42,11 +45,12 @@ select{font-size:18px;height:40px;border-radius:5px;border:1px solid #c8cccf;out
 		  {% for item in all_links %}
 		  <tr>
 			<td id="id">{{item.id}}</td>
-			<td><input id="cid-{{item.id}}" value="{{item.cid}}"></td>
-			<td><input id="name-{{item.id}}" value="{{item.name}}"></td>
-			<td colspan="2"><input id="url-{{item.id}}" value="{{item.url}}"></td>
-			<td colspan="3"><input id="desc-{{item.id}}" value="{{item.desc}}"></td>
-			<td><input id="rank-{{item.id}}" value="{{item.rank}}"></td>
+			<td><input id="cid_{{item.id}}" value="{{item.cid}}"></td>
+			<td><input id="name_{{item.id}}" value="{{item.name}}"></td>
+			<td colspan="2"><input id="url_{{item.id}}" value="{{item.url}}"></td>
+			<td colspan="3"><input id="desc_{{item.id}}" value="{{item.desc}}"></td>
+			<td><input id="rank_{{item.id}}" value="{{item.rank}}"></td>
+			  <td><input id="top_{{item.id}}" value="{{item.is_ad}}"></td>
 			<td><a href="#top" onclick="edit_link({{item.id}})">保存</a> ｜ <a href="#top" onclick="del_link({{item.id}})">删除</a></td>
 		  </tr>
 		  {% endfor %}
@@ -59,7 +63,7 @@ function changeSelect(cid){
     window.location.replace('/admin/links/'+cid);
 };
 function add_url(){
-    var data = JSON.stringify({"name": document.getElementById('add-name').value,"url": document.getElementById('add-url').value,"desc": document.getElementById('add-desc').value,"cid": document.getElementById('add-cid').value,"rank": new Number(document.getElementById('add-rank').value)});
+    var data = JSON.stringify({"name": document.getElementById('add-name').value,"url": document.getElementById('add-url').value,"desc": document.getElementById('add-desc').value,"cid": document.getElementById('add-cid').value,"rank": new Number(document.getElementById('add-rank').value),"is_ad": new Number(document.getElementById('add-ad').value)});
     ajax({
       type:"POST",
       url:"/admin/add/link",
@@ -104,7 +108,7 @@ function del_link(id){
     })
 }
 function edit_link(id){
-    var data = JSON.stringify({"id": id,"name": document.getElementById('name-'+id).value,"url": document.getElementById('url-'+id).value,"desc": document.getElementById('desc-'+id).value,"cid": document.getElementById('cid-'+id).value,"rank": new Number(document.getElementById('rank-'+id).value)});
+    var data = JSON.stringify({"id": id,"name": document.getElementById('name_'+id).value,"url": document.getElementById('url_'+id).value,"desc": document.getElementById('desc_'+id).value,"cid": document.getElementById('cid_'+id).value,"rank": new Number(document.getElementById('rank_'+id).value),"is_ad": new Number(document.getElementById('top_'+id).value)});
     console.log(data);
     ajax({
       type:"POST",

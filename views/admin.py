@@ -110,7 +110,10 @@ def admin_link(cid):
     if keyword:
         all_links = dc.db_search_link(keyword)
     else:
-        all_links = dc.db_get_links(cid)
+        if cid == 0:
+            all_links = dc.db_get_ad_links()
+        else:
+            all_links = dc.db_get_links(cid)
     return render_template('admin/link.html', all_class=all_class, cid=cid, all_links=all_links)
 
 

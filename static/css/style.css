@@ -15,7 +15,7 @@ a:hover{color:#ff7055}
 .content{margin:50px auto 5px;max-width:1300px;padding:5px 10px;display:flex;display:-webkit-flex;flex-wrap:wrap;justify-content:space-between}
 .board{padding:5px;background-color:#FFF;border-radius:6px;width:31%;margin:10px 3px;}
 .title{font-size:large;background-color:#ff70552b;padding:3px 8px;border-radius:3px;margin-bottom:10px;scroll-margin-top: 50px;}
-.title_nav{max-height:475px;overflow:auto;}
+.title_nav{max-height:475px;overflow:auto;margin-top:-4px;}
 .title-animation{animation:mymove 1s infinite;}
 .long-title{width:100%;margin-top:10px}
 .link{margin:5px 0;padding:6px 10px;border-radius:3px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background-color:#dedfe24b;color:#444;font-weight:bold;}

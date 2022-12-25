@@ -49,6 +49,10 @@ class DbCurd(object):
         # 根据分类ID获取所有链接
         return Links.query.filter(Links.cid == cid).order_by(Links.rank.desc()).all()
 
+    def db_get_ad_links(self):
+        # 获取广告链接
+        return Links.query.filter(Links.is_ad == 1).order_by(Links.id).all()
+
     def db_get_links_by_rank(self, cid, num):
         # 获取分类下最热门链接
         return Links.query.filter(Links.cid == cid).order_by(Links.rank.desc()).limit(num).all()
